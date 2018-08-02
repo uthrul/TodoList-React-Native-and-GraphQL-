@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
-import { View, Text, FlatList, Button } from 'react-native';
+import { View, FlatList, Button } from 'react-native';
+import { 
+  List, ListItem, Text, 
+  Container, Header, Content, Left, Right, Icon
+} from 'native-base';
 import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
 
@@ -9,22 +13,31 @@ class Posts extends Component {
     const { loading, allPosts, navigation } = this.props;
     if(loading)return null;
     return (
-      <View>
-        <FlatList 
-          data={allPosts}
-          renderItem={({ item }) => (
-            <Text onPress={() => 
-              this.props.navigation.navigate("Post", {
-                id: item.id,
-                title: item.title
-              })}>
-              {item.title}
-            </Text>
-          )}
-          keyExtractor={item => item.id}
-        />
-      
-      </View>
+      <Container>
+        <Content>
+        <List>
+          <FlatList 
+            data={allPosts}
+            renderItem={({ item }) => (
+              <ListItem selected
+                  onPress={() => 
+                    navigation.navigate("Post", {
+                    id: item.id,
+                    title: item.title,
+                  })}>
+                  <Left>
+                    <Text>{item.title}</Text>
+                  </Left>
+                  <Right>
+                    <Icon name="arrow-forward" />
+                  </Right>
+              </ListItem>
+            )}
+            keyExtractor={item => item.id}
+          />
+        </List>
+        </Content>
+      </Container>
     );
   }
 }

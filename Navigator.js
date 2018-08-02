@@ -2,6 +2,7 @@
 import React from 'react';
 import { StyleSheet,View, Text, TouchableHighlight } from 'react-native';
 import { StackNavigator} from 'react-navigation';
+import { Container, Header, Fab, Button, Icon} from 'native-base';
 
 import Post from './components/posts/Post';
 import Posts from './components/posts/Posts';
@@ -26,9 +27,12 @@ class Home extends React.Component {
       return (
         <View style={styles.container}>
             <Posts{...this.props} />
-            <TouchableHighlight onPress={this.NewPost} style={styles.newPost}>
-                <Text style={styles.newPostText}>New Post +</Text>
-            </TouchableHighlight>
+              <Fab 
+                onPress={this.NewPost}
+                style={styles.newPost}
+              >
+                <Icon name= 'add'/>
+              </Fab>
         </View>
       );
     }
